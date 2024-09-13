@@ -1,11 +1,11 @@
 import { BorderedButton, DefaultButton } from "./styles.js";
 
-export const Button = ({ variant = "default", children, ...props}) => {
+export const Button = ({ variant = "default", children, onClick, ...props}) => {
   if (variant === "default") {
-    return <DefaultButton{...props}>{children}</DefaultButton>;
+    return <DefaultButton{...props} onClick={onClick}>{children}</DefaultButton>;
   }
 
   if (variant === "bordered") {
-    return <BorderedButton{...props}>{children}</BorderedButton>;
+    return <BorderedButton{...props} onClick={onClick}>{children}</BorderedButton>;
   }
 };

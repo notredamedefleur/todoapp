@@ -1,17 +1,15 @@
 import styled from "@emotion/styled";
+import { FONTS } from "../ui-kit/consts/fonts/FONTS.jsx";
 
 export const DefaultButton = styled.button`
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 30px;
-`
+    font-family: Poppins, sans-serif;
+  ${FONTS.button1}
+`;
 
 export const BorderedButton = styled.button`
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 36px;
-    border: 2px solid black;
-    background-color: #F1FFDF;
-    border-radius: 30px;
-    padding: 3px 74px 5px 74px;
-`
+  font-family: Poppins, sans-serif;
+  ${FONTS.header7}
+  border: 2px solid black;
+  background-color: #f1ffdf;
+  border-radius: 30px;
+`;

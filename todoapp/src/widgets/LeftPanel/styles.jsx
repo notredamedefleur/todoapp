@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import {Button} from "../../shared/components/Button/index.jsx";
+import  {FONTS } from "../../shared/components/ui-kit/consts/fonts/FONTS.jsx";
 
 
 export const Background = styled.div`
@@ -15,8 +16,7 @@ export const UserPanel = styled.div`
   display: flex;
   align-items: center;
   margin: 30px;
-  font-size: 24px;
-  font-weight: 600;
+  ${FONTS.header4}
 `;
 
 export const TasksTab = styled.div``;
@@ -29,18 +29,14 @@ export const TagsBody = styled.div`
 `;
 
 export const TagsHeader = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 30px;
+    ${FONTS.header2}
   margin-left: 30px;
   margin-bottom: 20px;
   margin-right: 30px;
 `;
 
 export const TasksHeader = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 30px;
+${FONTS.header2}
   margin: 30px 20px 0px 30px;
 `;
 
