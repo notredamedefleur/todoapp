@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export const TaskList = ({ tasks, setTasks, taskPanelDisplay }) => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
-  console.log({ tasks });
+
   function toggleCheck(taskId) {
     let tempTask = tasks.find((task) => task.id === taskId);
     console.log(tempTask);
@@ -15,8 +15,10 @@ export const TaskList = ({ tasks, setTasks, taskPanelDisplay }) => {
 
     console.log(1);
   }
-  console.log({filteredTasks});
+  console.log({tasks});
+  console.log({ filteredTasks });
   console.log(taskPanelDisplay);
+
   useEffect(() => {
     if (taskPanelDisplay === "Today") {
       setFilteredTasks(
