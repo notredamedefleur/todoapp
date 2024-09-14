@@ -16,13 +16,13 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const Tab = ({ taskPanelDisplay }) => {
+const Tab = ({ taskPanelDisplay, tasks, setTasks }) => {
   if (taskPanelDisplay === "All")
     return (
       <TabsWrapper>
-        <Tab taskPanelDisplay={"Today"}></Tab>
-        <Tab taskPanelDisplay={"Upcoming"}></Tab>
-        <Tab taskPanelDisplay={"Finished"}></Tab>
+        <Tab taskPanelDisplay={"Today"} tasks={tasks} setTasks={setTasks}></Tab>
+        <Tab taskPanelDisplay={"Upcoming"} tasks={tasks} setTasks={setTasks}></Tab>
+        <Tab taskPanelDisplay={"Finished"} tasks={tasks} setTasks={setTasks}></Tab>
       </TabsWrapper>
     );
 
@@ -30,19 +30,19 @@ const Tab = ({ taskPanelDisplay }) => {
     <div>
       <ListHeader>{taskPanelDisplay}</ListHeader>
       <Divider />
-      <TaskList></TaskList>
+      <TaskList tasks={tasks} setTasks={setTasks} taskPanelDisplay={taskPanelDisplay} />
     </div>
   );
 };
 
-export const TaskPanel = ({ taskPanelDisplay, handleClick }) => {
+export const TaskPanel = ({ taskPanelDisplay, handleClick, tasks, setTasks }) => {
   return (
     <Wrapper>
       <HeaderWrapper>
         <Header>TASKS</Header>
         <AddNewTask onClick = {handleClick}>+ Add New Task</AddNewTask>
       </HeaderWrapper>
-      <Tab taskPanelDisplay={capitalize(taskPanelDisplay)}></Tab>
+      <Tab taskPanelDisplay={capitalize(taskPanelDisplay)} tasks = {tasks} setTasks={setTasks}></Tab>
     </Wrapper>
   );
 };

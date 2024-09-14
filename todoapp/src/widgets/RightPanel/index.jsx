@@ -25,26 +25,19 @@ export const RightPanel = ({
   rightPanelVisibility,
   handleClick,
   className,
+    tasks, setTasks,
+    taskId, setTaskId,
 }) => {
   if (rightPanelVisibility === false) return null;
 
   const [taskName, setTaskName] = useState("New Task");
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskDate, setTaskDate] = useState("");
-  const [taskId, setTaskId] = useState(0);
+  const [taskDate, setTaskDate] = useState(new Date());
 
 
 
-  // const [task, setTask] = useState({});
 
-  // function handleChange(e) {
-  //   let updatedValue = {};
-  //   updatedValue[e.target.name] = e.target.value;
-  //   setTask(task => ({
-  //     ...task,
-  //     ...updatedValue,
-  //   }));
-  // }
+
 
   function saveTask() {
     let task = {};
@@ -52,7 +45,13 @@ export const RightPanel = ({
     setTaskId(taskId + 1);
     task.name = taskName;
     task.description = taskDescription;
+    task.date = taskDate;
+    task.isChecked = false;
 
+    let newTasks = tasks;
+    newTasks.push(task);
+    setTasks(newTasks);
+    handleClick();
   }
 
 
@@ -60,7 +59,6 @@ export const RightPanel = ({
   return (
     <Background>
       <Wrapper>
-        {/*<label>*/}
         <Header
           className={className}
           value={taskName}
@@ -73,7 +71,7 @@ export const RightPanel = ({
         />
         <DatePickerWrapper>
           <Text>Due Date:</Text>
-          <DatePickerStyled className={className} value={taskDate} onSubmit={(e) => setTaskDate(e.target.value)} ></DatePickerStyled>
+          <DatePickerStyled taskDate={taskDate} setTaskDate={setTaskDate}></DatePickerStyled>
         </DatePickerWrapper>
         <TagsPanel>
           Tags:
@@ -83,7 +81,7 @@ export const RightPanel = ({
         </TagsPanel>
       </Wrapper>
       <ButtonWrapper>
-        <Button onClick={""}>Delete Task</Button>
+        <Button>Delete Task</Button>
         <Button onClick={saveTask}>Save Changes</Button>
       </ButtonWrapper>
     </Background>

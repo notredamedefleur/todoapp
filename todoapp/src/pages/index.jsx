@@ -6,9 +6,11 @@ import { useState } from "react";
 
 export const ToDoPage = ({ className }) => {
 
-  const [taskPanelDisplay, setTaskPanelDisplay] = useState("all");
+
+  const [taskPanelDisplay, setTaskPanelDisplay] = useState("today");
   const [tasks, setTasks] = useState([]);
   const [rightPanelVisibility, setRightPanelVisibility] = useState(true);
+  const [taskId, setTaskId] = useState(0);
 
   function handleClick(status) {
     setTaskPanelDisplay(status);
@@ -24,9 +26,9 @@ export const ToDoPage = ({ className }) => {
     <div className={className}>
       <Wrapper>
         <LeftPanel handleClick={handleClick} />
-        <TaskPanel taskPanelDisplay={taskPanelDisplay} handleClick={toggleRightPanelVisibility} />
+        <TaskPanel taskPanelDisplay={taskPanelDisplay} handleClick={toggleRightPanelVisibility} tasks={tasks} setTasks={setTasks} />
       </Wrapper>
-      <RightPanel rightPanelVisibility={rightPanelVisibility} />
+      <RightPanel rightPanelVisibility={rightPanelVisibility} tasks={tasks} setTasks={setTasks} taskId={taskId} setTaskId={setTaskId} handleClick={toggleRightPanelVisibility} />
     </div>
   );
 };

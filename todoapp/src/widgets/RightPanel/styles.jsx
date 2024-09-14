@@ -46,10 +46,9 @@ export const Background = styled.div`
   width: 390px;
 `;
 
-export const DatePick = ({className}) => {
-  const [startDate, setStartDate] = useState(new Date());
+export const DatePick = ({className, taskDate, setTaskDate}) => {
   return (
-      <DatePicker className={className} selected={startDate} onChange={(date) => setStartDate(date)} />
+      <DatePicker className={className} selected={taskDate} onChange={(date) => setTaskDate(date)} minDate={new Date()} />
   );
 
 
