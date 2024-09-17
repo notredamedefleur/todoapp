@@ -14,10 +14,11 @@ import { UserAvatar } from "../../shared/components/UserAvatar/index.jsx";
 import { Divider } from "../../shared/components/Divider/index.jsx";
 import { Tag } from "../../shared/components/Tag/index.jsx";
 import { Button } from "../../shared/components/Button/index.jsx";
+import React from "react";
 
 
 
-export const LeftPanel = ({handleClick}) => {
+export const LeftPanel = ({handleClick, tags}) => {
   return (
     <Background>
       <UserPanel>
@@ -38,13 +39,13 @@ export const LeftPanel = ({handleClick}) => {
           <TagsTab>
             <TagsHeader>TAGS</TagsHeader>
             <TagsBody>
-              <Tag name="check" backgroundColor="null" />
-              <Tag name="check" />
-              <Tag name="check" />
+              {tags.map((tag) => <Tag key={tag.id} tagName={tag.tagName} tagColor={tag.tagColor}></Tag>)}
             </TagsBody>
           </TagsTab>
         </div>
+        <div style={{display: 'flex', justifyContent: "center"}}>
         <ResetButton variant="bordered">Reset</ResetButton>
+        </div>
       </ButtonWrapper>
     </Background>
   );

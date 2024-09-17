@@ -72,8 +72,12 @@ export const DatePickerWrapper = styled.div`
 `;
 
 export const TagsPanel = styled.div`
-  margin-top: 50px;
-  margin-left: 15px;
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  
 `;
 
 export const Wrapper = styled.div`

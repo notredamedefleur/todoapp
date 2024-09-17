@@ -3,32 +3,63 @@ import { Task } from "../Task/index.jsx";
 import { func } from "prop-types";
 import { useEffect, useState } from "react";
 
-export const TaskList = ({ tasks, setTasks, taskPanelDisplay }) => {
+export const TaskList = ({
+  tasks,
+  setTasks,
+  taskPanelDisplay,
+  toggleRightPanelVisibility,
+  setEditMode,
+  editMode,
+  setTaskToEdit,
+  taskToEdit,
+  setTaskName,
+  setTaskDescription,
+  setTaskDate,
+    setTaskId
+}) => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
 
-  function toggleCheck(taskId) {
+  function toggleCheck(e, taskId) {
+    e.stopPropagation();
     let tempTask = tasks.find((task) => task.id === taskId);
-    console.log(tempTask);
     tempTask.isChecked = !tempTask.isChecked;
-    tasks.map((task) => (task.id === taskId ? tempTask : task));
-    setTasks(tasks);
-
-    console.log(1);
+    const newTasks = tasks.map((task) =>
+      task.id === taskId ? tempTask : task,
+    );
+    setTasks(newTasks);
   }
-  console.log({tasks});
-  console.log({ filteredTasks });
-  console.log(taskPanelDisplay);
+
+  function editTask(taskId) {
+    if (editMode === true) {
+      toggleRightPanelVisibility();
+      setEditMode(false);
+      setTaskToEdit(null);
+      return;
+    }
+    toggleRightPanelVisibility();
+    setTaskId(taskId);
+    editMode ? setEditMode(false) : setEditMode(true);
+    setTaskToEdit(tasks.find((task) => task.id === taskId));
+  }
 
   useEffect(() => {
     if (taskPanelDisplay === "Today") {
       setFilteredTasks(
-        tasks.filter((task) => task.date.getDay() === new Date().getDay()),
+        tasks.filter(
+          (task) =>
+            task.date.getDay() === new Date().getDay() &&
+            task.isChecked === false,
+        ),
       );
       return;
     }
     if (taskPanelDisplay === "Upcoming") {
       setFilteredTasks(
-        tasks.filter((task) => task.date.getDay() !== new Date().getDay()),
+        tasks.filter(
+          (task) =>
+            task.date.getDay() !== new Date().getDay() &&
+            task.isChecked === false,
+        ),
       );
       return;
     }
@@ -39,12 +70,13 @@ export const TaskList = ({ tasks, setTasks, taskPanelDisplay }) => {
     setFilteredTasks(tasks);
   }, [taskPanelDisplay, tasks]);
 
-  let tasksToRender = filteredTasks.map((task) => (
+  const tasksToRender = filteredTasks.map((task) => (
     <Task
       key={task.id}
       taskName={task.name}
       isChecked={task.isChecked}
-      handleClick={() => toggleCheck(task.id)}
+      toggleCheck={(e) => toggleCheck(e, task.id)}
+      editTask={() => editTask(task.id)}
     />
   ));
   return <TaskListStyled>{tasksToRender}</TaskListStyled>;
