@@ -1,3 +1,3 @@
-import {DividerStyled} from "./styles.jsx";
+import { DividerStyled } from "./styles.jsx";
 
-export const Divider = () => <DividerStyled/>
+export const Divider = () => <DividerStyled />;

@@ -15,7 +15,8 @@ export const Tab = ({
     setTaskToEdit,
     setEditMode,
     editMode,
-    setTaskId
+    setTaskId,
+    tagToFilter
 }) => {
   return (
     <div>
@@ -34,6 +35,7 @@ export const Tab = ({
         setTaskDate={setTaskDate}
         editMode={editMode}
         setTaskId={setTaskId}
+        tagToFilter={tagToFilter}
       />
     </div>
   );

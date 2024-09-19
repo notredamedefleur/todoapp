@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import {Button} from "../../shared/components/Button/index.jsx";
-import  {FONTS } from "../../shared/components/ui-kit/consts/fonts/FONTS.jsx";
-
+import { Button } from "../../shared/components/Button/index.jsx";
+import { FONTS } from "../../shared/components/ui-kit/consts/fonts/FONTS.jsx";
 
 export const Background = styled.div`
+  position: relative;
   border-radius: 30px;
   background-color: #d2ff98bf;
   box-shadow: 0px 4px 4px 0px #00000040;
@@ -24,21 +24,20 @@ export const TasksTab = styled.div``;
 export const TagsTab = styled.div``;
 
 export const TagsBody = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const TagsHeader = styled.div`
-    ${FONTS.header2}
-    margin-left: 15px;
+  ${FONTS.header2}
+  margin-left: 15px;
 `;
 
 export const TasksHeader = styled.div`
-${FONTS.header2}
+  ${FONTS.header2}
   margin: 30px 20px 0px 15px;
-   
 `;
 
 export const TasksBody = styled.div`
@@ -52,15 +51,13 @@ export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-    height: 81%;
-
+  height: 81%;
 `;
 
-
 export const ResetButton = styled(Button)`
- width: 70%;
-    
-    
-    
-`
-
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  bottom: 20px;
+`;

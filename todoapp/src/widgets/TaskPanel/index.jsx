@@ -23,14 +23,15 @@ export const TaskPanel = ({
   tasks,
   setTasks,
   toggleRightPanelVisibility,
-                            setEditMode,
+  setEditMode,
   setTaskToEdit,
   taskToEdit,
   setTaskName,
   setTaskDescription,
   setTaskDate,
-    editMode,
-    setTaskId
+  editMode,
+  setTaskId,
+  tagToFilter,
 }) => {
   return (
     <Wrapper>
@@ -54,6 +55,7 @@ export const TaskPanel = ({
             setTaskDate={setTaskDate}
             editMode={editMode}
             setTaskId={setTaskId}
+            tagToFilter={tagToFilter}
           ></Tab>
           <Tab
             key={"Upcoming"}
@@ -69,6 +71,7 @@ export const TaskPanel = ({
             setTaskDate={setTaskDate}
             editMode={editMode}
             setTaskId={setTaskId}
+            tagToFilter={tagToFilter}
           ></Tab>
           <Tab
             key={"Finished"}
@@ -84,6 +87,7 @@ export const TaskPanel = ({
             setTaskDate={setTaskDate}
             editMode={editMode}
             setTaskId={setTaskId}
+            tagToFilter={tagToFilter}
           ></Tab>
         </TabsWrapper>
       ) : (
@@ -101,6 +105,7 @@ export const TaskPanel = ({
           setTaskDate={setTaskDate}
           editMode={editMode}
           setTaskId={setTaskId}
+          tagToFilter={tagToFilter}
         ></Tab>
       )}
     </Wrapper>

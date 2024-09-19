@@ -1,7 +1,7 @@
 import { TaskListStyled } from "./styles.js";
 import { Task } from "../Task/index.jsx";
 import { func } from "prop-types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const TaskList = ({
   tasks,
@@ -15,9 +15,12 @@ export const TaskList = ({
   setTaskName,
   setTaskDescription,
   setTaskDate,
-    setTaskId
+  setTaskId,
+  tagToFilter,
 }) => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
+  // const [tasksSortedByTag, setTasksSortedByTag] = useState(tasks);
+  const [savedTasks, setSavedTasks] = useState(tasks);
 
   function toggleCheck(e, taskId) {
     e.stopPropagation();
@@ -42,12 +45,20 @@ export const TaskList = ({
     setTaskToEdit(tasks.find((task) => task.id === taskId));
   }
 
+  const mapTagsId = useCallback((tags) => tags.map((tag) => tag.tagName), []);
+
   useEffect(() => {
+    let tasksToFilter = tasks;
+    if (tagToFilter) {
+      tasksToFilter = tasks.filter((task) =>
+        mapTagsId(task.tags).includes(tagToFilter.tagName),
+      );
+    }
     if (taskPanelDisplay === "Today") {
       setFilteredTasks(
-        tasks.filter(
+        tasksToFilter.filter(
           (task) =>
-            task.date.getDay() === new Date().getDay() &&
+            new Date(task.date).getDay() === new Date().getDay() &&
             task.isChecked === false,
         ),
       );
@@ -55,20 +66,20 @@ export const TaskList = ({
     }
     if (taskPanelDisplay === "Upcoming") {
       setFilteredTasks(
-        tasks.filter(
+        tasksToFilter.filter(
           (task) =>
-            task.date.getDay() !== new Date().getDay() &&
+            new Date(task.date).getDay() !== new Date().getDay() &&
             task.isChecked === false,
         ),
       );
       return;
     }
     if (taskPanelDisplay === "Finished") {
-      setFilteredTasks(tasks.filter((task) => task.isChecked === true));
+      setFilteredTasks(tasksToFilter.filter((task) => task.isChecked === true));
       return;
     }
-    setFilteredTasks(tasks);
-  }, [taskPanelDisplay, tasks]);
+    setFilteredTasks(tasksToFilter);
+  }, [taskPanelDisplay, tasks, tagToFilter]);
 
   const tasksToRender = filteredTasks.map((task) => (
     <Task

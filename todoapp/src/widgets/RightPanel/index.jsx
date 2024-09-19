@@ -23,7 +23,6 @@ export const RightPanel = ({
   tasks,
   setTasks,
   taskId,
-  setTaskId,
   editMode,
   setEditMode,
   toggleRightPanelVisibility,
@@ -37,10 +36,11 @@ export const RightPanel = ({
   tags,
   setTags,
   setTaskToEdit,
-    currentTags, setCurrentTags, handleTagClick
+  currentTags,
+  setCurrentTags,
+  handleTagClick,
 }) => {
   if (rightPanelVisibility === false) return null;
-
 
   function deleteTask() {
     if (editMode === false) {
@@ -103,7 +103,7 @@ export const RightPanel = ({
       let tag = {};
       tag.tagName = content;
       tag.tagColor = pickRandomColor();
-      tag.id = crypto.randomUUID();
+      tag.id = content;
       let newTags = [...tags];
       newTags.push(tag);
       setTags(newTags);
@@ -124,7 +124,12 @@ export const RightPanel = ({
   const mapTags = useCallback(
     (tags) =>
       tags.map((tag) => (
-        <Tag key={tag.id} tagName={tag.tagName} tagColor={tag.tagColor} handleTagClick={handleTagClick}></Tag>
+        <Tag
+          key={tag.id}
+          tagName={tag.tagName}
+          tagColor={tag.tagColor}
+          handleTagClick={handleTagClick}
+        ></Tag>
       )),
 
     [],
@@ -152,13 +157,15 @@ export const RightPanel = ({
         </DatePickerWrapper>
         <TagsPanel>
           <Text>Tags:</Text>
-          {(!editMode ? <AddNewTag
-            tagName="+ Add New Tag"
-            tagColor="#FAFFC0"
-            addNewTag={addNewTag}
-            content={content}
-            setContent={setContent}
-          /> : null)}
+          {!editMode ? (
+            <AddNewTag
+              tagName="+ Add New Tag"
+              tagColor="#FAFFC0"
+              addNewTag={addNewTag}
+              content={content}
+              setContent={setContent}
+            />
+          ) : null}
           {taskToEdit ? mapTags(taskToEdit.tags) : mapTags(currentTags)}
         </TagsPanel>
       </Wrapper>

@@ -14,9 +14,9 @@ export const Checkbox = styled.div`
   height: 22px;
 
   background-size: contain;
-  
+
   ${(props) =>
     props.isChecked
       ? 'background-image: url("/xicon.png")'
       : "background-image: unset"}
-`
+`;

@@ -46,12 +46,15 @@ export const Background = styled.div`
   width: 390px;
 `;
 
-export const DatePick = ({className, taskDate, setTaskDate}) => {
+export const DatePick = ({ className, taskDate, setTaskDate }) => {
   return (
-      <DatePicker className={className} selected={taskDate} onChange={(date) => setTaskDate(date)} minDate={new Date()} />
+    <DatePicker
+      className={className}
+      selected={taskDate}
+      onChange={(date) => setTaskDate(date)}
+      minDate={new Date()}
+    />
   );
-
-
 };
 export const DatePickerStyled = styled(DatePick)`
   background: transparent;
@@ -64,7 +67,6 @@ export const DatePickerStyled = styled(DatePick)`
   line-height: 24px;
 `;
 
-
 export const DatePickerWrapper = styled.div`
   display: flex;
   margin-right: 30px;
@@ -72,12 +74,11 @@ export const DatePickerWrapper = styled.div`
 `;
 
 export const TagsPanel = styled.div`
-display: flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  
 `;
 
 export const Wrapper = styled.div`

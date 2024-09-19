@@ -6,7 +6,6 @@ import {
   header6,
 } from "../../shared/components/ui-kit/consts/fonts/FONTS.jsx";
 
-
 export const Header = styled.h1`
   ${header5}
 `;
@@ -15,8 +14,6 @@ export const Wrapper = styled.div`
   margin: 30px;
   width: 600px;
 `;
-
-
 
 export const UpcomingTab = styled.div``;
 export const FinishedTab = styled.div``;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { FONTS } from "../ui-kit/consts/fonts/FONTS.jsx";
 
 export const DefaultButton = styled.button`
-    font-family: Poppins, sans-serif;
+  font-family: Poppins, sans-serif;
   ${FONTS.button1}
 `;
 
