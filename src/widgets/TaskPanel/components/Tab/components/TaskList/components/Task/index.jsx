@@ -1,5 +1,5 @@
 import { Checkbox, TaskStyled } from "./styles.js";
-import { Divider } from "../../../../shared/components/Divider/index.jsx";
+import { Divider } from "shared/components";
 
 export const Task = ({
   taskName = "default",

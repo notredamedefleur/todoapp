@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import * as FONTS from "../../shared/components/ui-kit/consts/fonts";
+import * as FONTS from "../../shared/consts/index.js";
 
 export const Background = styled.div`
   background-color: #f1ffdf;

@@ -1,4 +1,4 @@
-import { Input, Span, TagInput, Wrapper } from "./styles.js";
+import {Input, Span, TagName, Wrapper} from "./styles.js";
 import React, { useEffect, useRef, useState } from "react";
 
 
@@ -35,7 +35,7 @@ export const AddNewTag = ({ content, setContent, tagColor, addNewTag }) => {
 export const Tag = ({ tagName, tagColor, handleTagClick }) => {
   return (
     <Wrapper tagColor={tagColor} onClick={handleTagClick}>
-      <div style={{ backgroundColor: tagColor }}>{tagName}</div>
+      <TagName tagColor={tagColor}>{tagName}</TagName>
     </Wrapper>
   );
 };

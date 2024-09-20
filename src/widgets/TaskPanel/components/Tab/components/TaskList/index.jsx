@@ -1,7 +1,6 @@
 import { TaskListStyled } from "./styles.js";
-import { Task } from "../Task/index.jsx";
-import { func } from "prop-types";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Task } from "./components/Task";
+import { useCallback, useEffect, useState } from "react";
 
 export const TaskList = ({
   tasks,
@@ -11,16 +10,12 @@ export const TaskList = ({
   setEditMode,
   editMode,
   setTaskToEdit,
-  taskToEdit,
-  setTaskName,
-  setTaskDescription,
-  setTaskDate,
   setTaskId,
   tagToFilter,
 }) => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
   // const [tasksSortedByTag, setTasksSortedByTag] = useState(tasks);
-  const [savedTasks, setSavedTasks] = useState(tasks);
+  // const [savedTasks, setSavedTasks] = useState(tasks);
 
   function toggleCheck(e, taskId) {
     e.stopPropagation();

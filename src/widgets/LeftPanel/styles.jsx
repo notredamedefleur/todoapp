@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { Button } from "../../shared/components/Button/index.jsx";
-import { FONTS } from "../../shared/components/ui-kit/consts/fonts";
+import { Button } from "shared/components";
+import { FONTS } from "shared/consts";
 
 export const Background = styled.div`
   position: relative;
   border-radius: 30px;
   background-color: #d2ff98bf;
-  box-shadow: 0px 4px 4px 0px #00000040;
+  box-shadow: 0 4px 4px 0 #00000040;
   width: 350px;
   height: calc(100vh - 30px);
   margin: 15px;

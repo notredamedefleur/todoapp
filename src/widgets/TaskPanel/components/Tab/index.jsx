@@ -1,22 +1,17 @@
 import { ListHeader } from "./styles.js";
-import { Divider } from "../../../../shared/components/Divider/index.jsx";
-import { TaskList } from "../../../LeftPanel/components/TaskList/index.jsx";
+import { Divider } from "shared/components/Divider";
+import { TaskList } from "./components/TaskList";
 
 export const Tab = ({
   taskPanelDisplay,
   tasks,
   setTasks,
   toggleRightPanelVisibility,
-  toggleEditMode,
-  taskToEdit,
-  setTaskName,
-  setTaskDescription,
-  setTaskDate,
-    setTaskToEdit,
-    setEditMode,
-    editMode,
-    setTaskId,
-    tagToFilter
+  setTaskToEdit,
+  setEditMode,
+  editMode,
+  setTaskId,
+  tagToFilter,
 }) => {
   return (
     <div>
@@ -29,10 +24,6 @@ export const Tab = ({
         toggleRightPanelVisibility={toggleRightPanelVisibility}
         setEditMode={setEditMode}
         setTaskToEdit={setTaskToEdit}
-        taskToEdit={taskToEdit}
-        setTaskName={setTaskName}
-        setTaskDescription={setTaskDescription}
-        setTaskDate={setTaskDate}
         editMode={editMode}
         setTaskId={setTaskId}
         tagToFilter={tagToFilter}

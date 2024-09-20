@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import {header6} from "../../../../shared/components/ui-kit/consts/fonts/fonts.js";
+import {FONTS} from "shared/consts";
 
 export const ListHeader = styled.div`
-  ${header6};
+  ${FONTS.header6};
 `;

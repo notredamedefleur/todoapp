@@ -1,3 +1,4 @@
+import React from "react";
 import {
   TagsTab,
   TasksBody,
@@ -10,11 +11,8 @@ import {
   ButtonWrapper,
   ResetButton,
 } from "./styles.jsx";
-import { UserAvatar } from "../../shared/components/UserAvatar/index.jsx";
-import { Divider } from "../../shared/components/Divider/index.jsx";
-import { Tag } from "../../shared/components/Tag/index.jsx";
-import { Button } from "../../shared/components/Button/index.jsx";
-import React from "react";
+
+import { UserAvatar, Divider, Tag, Button } from "shared/components";
 
 export const LeftPanel = ({
   handleClick,
@@ -22,15 +20,17 @@ export const LeftPanel = ({
   handleTagClick,
   showAllTags,
   clearLS,
+  userName,
+  userAvatar,
 }) => {
   return (
     <Background>
       <UserPanel>
         <UserAvatar
           type="onUser"
-          userImage={localStorage.userAvatar || "./public/chicken.jpg"}
+          userImage={userAvatar || "./public/chicken.jpg"}
         />
-        <span>{localStorage.userName || ""}</span>
+        <span>{userName || ""}</span>
       </UserPanel>
       <Divider />
       <ButtonWrapper>
