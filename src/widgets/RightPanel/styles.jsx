@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { FONTS } from "../../shared/components/ui-kit/consts/fonts";
-import { BorderedButton } from "../../shared/components/Button/styles.js";
-import React, { useState } from "react";
+import { FONTS } from "../../shared/consts/index.js";
+import { Button } from "shared/components";
+import React from "react";
 
 import DatePicker from "react-datepicker";
 
@@ -86,7 +86,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export const Button = styled(BorderedButton)`
+export const ButtonStyled = styled(Button)`
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;

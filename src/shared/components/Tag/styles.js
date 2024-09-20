@@ -8,6 +8,10 @@ export const Wrapper = styled.span`
   background-color: ${(props) => props.tagColor};
 `;
 
+export const TagName = styled.span`
+  background-color: ${(props) => props.tagColor};
+`;
+
 export const TagInput = styled.input`
   width: fit-content;
   background-color: ${(props) => props.tagColor};

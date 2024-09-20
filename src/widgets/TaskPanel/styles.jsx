@@ -1,13 +1,9 @@
 import styled from "@emotion/styled";
-import { Button } from "../../shared/components/Button/index.jsx";
-import {
-  body2,
-  header5,
-  header6,
-} from "../../shared/components/ui-kit/consts/fonts/fonts.js";
+import { Button } from "shared/components";
+import { FONTS } from "shared/consts";
 
 export const Header = styled.h1`
-  ${header5}
+  ${FONTS.header5}
 `;
 
 export const Wrapper = styled.div`
@@ -25,10 +21,10 @@ export const AddNewTask = styled(Button)`
 
   padding-left: 20px;
   padding-right: 20px;
-  ${body2}
+  ${FONTS.body2}
 `;
 export const ListHeader = styled.div`
-  ${header6}
+  ${FONTS.header6}
 `;
 
 export const TabsWrapper = styled.div`

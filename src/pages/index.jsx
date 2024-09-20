@@ -1,46 +1,46 @@
 import { LeftPanel } from "../widgets/LeftPanel/index.jsx";
 import { TaskPanel } from "../widgets/TaskPanel/index.jsx";
 import { RightPanel } from "../widgets/RightPanel/index.jsx";
-import { Wrapper } from "./styles.js";
+import { Container, Wrapper } from "./styles.js";
 import { useEffect, useState } from "react";
 import { LoginPopUp } from "../widgets/LoginPopUp/index.jsx";
+import { getFromLS } from "shared/utils";
 
-export const ToDoPage = ({ className }) => {
+export const ToDoPage = () => {
   const [taskPanelDisplay, setTaskPanelDisplay] = useState("all");
   const [tasks, setTasks] = useState(getFromLS("tasks") || []);
   const [rightPanelVisibility, setRightPanelVisibility] = useState(false);
-  const [taskId, setTaskId] = useState(crypto.randomUUID());
+  const [taskId, setTaskId] = useState(undefined);
   const [editMode, setEditMode] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
-  const [taskName, setTaskName] = useState("New Task");
+  const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskDate, setTaskDate] = useState(new Date());
+  const [taskDate, setTaskDate] = useState(undefined);
   const [tags, setTags] = useState(getFromLS("tags") || []);
   const [currentTags, setCurrentTags] = useState([]);
   const [tagToFilter, setTagToFilter] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [showModal, setShowModal] = useState(true);
-
-  function getFromLS(key) {
-    return JSON.parse(localStorage.getItem(key));
-  }
-
-  function setToLS() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem("tags", JSON.stringify(tags));
-    localStorage.setItem("userName", userName);
-    localStorage.setItem("userAvatar", userAvatar);
-  }
+  const [userName, setUserName] = useState(
+    localStorage.getItem("userName") || "",
+  );
+  const [userAvatar, setUserAvatar] = useState(
+    localStorage.getItem("userAvatar") || "",
+  );
+  const [showModal, setShowModal] = useState(!localStorage.getItem("userName"));
 
   function clearLs() {
     localStorage.clear();
     setTasks([]);
     setTags([]);
+    setUserName("");
+    setUserAvatar("./public/chicken.jpg");
+    setShowModal(true);
   }
 
   useEffect(() => {
-    setToLS();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tags", JSON.stringify(tags));
+    localStorage.setItem("userName", userName);
+    localStorage.setItem("userAvatar", userAvatar);
   }, [tasks, tags, userAvatar, userName]);
 
   function handleClick(status) {
@@ -65,10 +65,6 @@ export const ToDoPage = ({ className }) => {
     setRightPanelVisibility(!rightPanelVisibility);
   }
 
-  function toggleEditMode() {
-    setEditMode(!editMode);
-  }
-
   function handleTagClick(tag) {
     setTagToFilter(tag);
   }
@@ -79,23 +75,16 @@ export const ToDoPage = ({ className }) => {
 
   return (
     <>
-      <LoginPopUp
-        setUserName={setUserName}
-        setUserAvatar={setUserAvatar}
-        setShowModal={setShowModal}
-        showModal={showModal}
-      />
-      <div className={className}>
+      <Container>
         <Wrapper>
           <LeftPanel
-            userAvatar={userAvatar}
-            clearLS={clearLs}
             handleClick={handleClick}
             tags={tags}
             handleTagClick={handleTagClick}
             showAllTags={showAllTags}
+            clearLS={clearLs}
             userName={userName}
-            getFromLS={getFromLS}
+            userAvatar={userAvatar}
           />
           <TaskPanel
             taskPanelDisplay={taskPanelDisplay}
@@ -137,7 +126,14 @@ export const ToDoPage = ({ className }) => {
           setCurrentTags={setCurrentTags}
           handleTagClick={handleTagClick}
         />
-      </div>
+      </Container>
+
+      <LoginPopUp
+        setUserName={setUserName}
+        setUserAvatar={setUserAvatar}
+        setShowModal={setShowModal}
+        showModal={showModal}
+      />
     </>
   );
 };

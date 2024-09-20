@@ -1,17 +1,13 @@
 import {
   AddNewTask,
-  FinishedTab,
   Header,
   HeaderWrapper,
-  ListHeader,
   TabsWrapper,
-  UpcomingTab,
 } from "./styles.jsx";
 import { Wrapper } from "./styles.jsx";
-import { Task } from "../LeftPanel/components/Task/index.jsx";
-import { Divider } from "../../shared/components/Divider/index.jsx";
-import { TaskList } from "../LeftPanel/components/TaskList/index.jsx";
 import { Tab } from "./components/Tab/index.jsx";
+import { useMemo } from "react";
+import { tabList } from "./consts.js";
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -26,13 +22,31 @@ export const TaskPanel = ({
   setEditMode,
   setTaskToEdit,
   taskToEdit,
-  setTaskName,
-  setTaskDescription,
-  setTaskDate,
   editMode,
   setTaskId,
   tagToFilter,
 }) => {
+
+  const allTabs = useMemo(
+    () =>
+      tabList.map((tab) => (
+        <Tab
+          key={tab}
+          taskPanelDisplay={tab}
+          tasks={tasks}
+          setTasks={setTasks}
+          toggleRightPanelVisibility={toggleRightPanelVisibility}
+          setEditMode={setEditMode}
+          setTaskToEdit={setTaskToEdit}
+          taskToEdit={taskToEdit}
+          editMode={editMode}
+          setTaskId={setTaskId}
+          tagToFilter={tagToFilter}
+        />
+      )),
+    [tasks],
+  );
+
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -40,56 +54,7 @@ export const TaskPanel = ({
         <AddNewTask onClick={addNewTask}>+ Add New Task</AddNewTask>
       </HeaderWrapper>
       {taskPanelDisplay === "all" ? (
-        <TabsWrapper>
-          <Tab
-            key={"Today"}
-            taskPanelDisplay={"Today"}
-            tasks={tasks}
-            setTasks={setTasks}
-            toggleRightPanelVisibility={toggleRightPanelVisibility}
-            setEditMode={setEditMode}
-            setTaskToEdit={setTaskToEdit}
-            taskToEdit={taskToEdit}
-            setTaskName={setTaskName}
-            setTaskDescription={setTaskDescription}
-            setTaskDate={setTaskDate}
-            editMode={editMode}
-            setTaskId={setTaskId}
-            tagToFilter={tagToFilter}
-          ></Tab>
-          <Tab
-            key={"Upcoming"}
-            taskPanelDisplay={"Upcoming"}
-            tasks={tasks}
-            setTasks={setTasks}
-            toggleRightPanelVisibility={toggleRightPanelVisibility}
-            setEditMode={setEditMode}
-            setTaskToEdit={setTaskToEdit}
-            taskToEdit={taskToEdit}
-            setTaskName={setTaskName}
-            setTaskDescription={setTaskDescription}
-            setTaskDate={setTaskDate}
-            editMode={editMode}
-            setTaskId={setTaskId}
-            tagToFilter={tagToFilter}
-          ></Tab>
-          <Tab
-            key={"Finished"}
-            taskPanelDisplay={"Finished"}
-            tasks={tasks}
-            setTasks={setTasks}
-            toggleRightPanelVisibility={toggleRightPanelVisibility}
-            setEditMode={setEditMode}
-            setTaskToEdit={setTaskToEdit}
-            taskToEdit={taskToEdit}
-            setTaskName={setTaskName}
-            setTaskDescription={setTaskDescription}
-            setTaskDate={setTaskDate}
-            editMode={editMode}
-            setTaskId={setTaskId}
-            tagToFilter={tagToFilter}
-          ></Tab>
-        </TabsWrapper>
+        <TabsWrapper>{allTabs}</TabsWrapper>
       ) : (
         <Tab
           key={taskPanelDisplay}
@@ -100,13 +65,10 @@ export const TaskPanel = ({
           setEditMode={setEditMode}
           setTaskToEdit={setTaskToEdit}
           taskToEdit={taskToEdit}
-          setTaskName={setTaskName}
-          setTaskDescription={setTaskDescription}
-          setTaskDate={setTaskDate}
           editMode={editMode}
           setTaskId={setTaskId}
           tagToFilter={tagToFilter}
-        ></Tab>
+        />
       )}
     </Wrapper>
   );

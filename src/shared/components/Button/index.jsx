@@ -3,12 +3,11 @@ import { BorderedButton, DefaultButton } from "./styles.js";
 export const Button = ({
   variant = "default",
   children,
-  onClick,
   ...props
 }) => {
   if (variant === "default") {
     return (
-      <DefaultButton {...props} onClick={onClick}>
+      <DefaultButton {...props}>
         {children}
       </DefaultButton>
     );
@@ -16,7 +15,7 @@ export const Button = ({
 
   if (variant === "bordered") {
     return (
-      <BorderedButton {...props} onClick={onClick}>
+      <BorderedButton {...props}>
         {children}
       </BorderedButton>
     );

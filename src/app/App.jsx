@@ -1,8 +1,6 @@
-
-
-import './reset.css';
-import { ToDoPageStyled } from "./styles.js";
+import { ToDoPage } from "../pages/index.jsx";
+import "./reset.css";
 
 export default function App() {
-  return <ToDoPageStyled />;
+  return <ToDoPage />;
 }

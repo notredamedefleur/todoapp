@@ -6,7 +6,7 @@ import {
   DatePickerWrapper,
   TagsPanel,
   Wrapper,
-  Button,
+  ButtonStyled,
   ButtonWrapper,
   DatePickerStyled,
 } from "./styles.jsx";
@@ -15,6 +15,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Tag, AddNewTag } from "../../shared/components/Tag/index.jsx";
+import { pickRandomColor } from "./utils.js";
 
 export const RightPanel = ({
   rightPanelVisibility,
@@ -39,8 +40,6 @@ export const RightPanel = ({
   setCurrentTags,
   handleTagClick,
 }) => {
-  if (rightPanelVisibility === false) return null;
-
   function deleteTask() {
     if (editMode === false) {
       toggleRightPanelVisibility();
@@ -76,25 +75,7 @@ export const RightPanel = ({
       setEditMode(false);
     }
   }
-  let colorArr = [];
 
-  function pickRandomColor() {
-    if (colorArr.length === 0) {
-      colorArr = [
-        "#FFEDFF",
-        "#FAFFC0",
-        "#FFFFFF",
-        "#D3DDFF",
-        "#AFDDC4",
-        "#FFDBB0",
-        "#E9D7FF",
-        "#FFCDDF",
-      ];
-    }
-    let pickedColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-    colorArr = colorArr.map((color) => color !== pickedColor);
-    return pickedColor;
-  }
   const [content, setContent] = useState("+ Add New Tag");
 
   function addNewTag(e) {
@@ -130,9 +111,12 @@ export const RightPanel = ({
           handleTagClick={handleTagClick}
         ></Tag>
       )),
-
     [],
   );
+
+  if (rightPanelVisibility === false) {
+    return null;
+  }
 
   return (
     <Background>
@@ -169,8 +153,8 @@ export const RightPanel = ({
         </TagsPanel>
       </Wrapper>
       <ButtonWrapper>
-        <Button onClick={deleteTask}>Delete Task</Button>
-        <Button onClick={saveTask}>Save Changes</Button>
+        <ButtonStyled variant='bordered' onClick={deleteTask}>Delete Task</ButtonStyled>
+        <ButtonStyled variant='bordered' onClick={saveTask}>Save Changes</ButtonStyled>
       </ButtonWrapper>
     </Background>
   );
