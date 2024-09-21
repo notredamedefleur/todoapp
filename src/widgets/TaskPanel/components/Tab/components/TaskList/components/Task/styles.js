@@ -17,6 +17,6 @@ export const Checkbox = styled.div`
 
   ${(props) =>
     props.isChecked
-      ? 'background-image: url("/xicon.png")'
+      ? 'background-image: url("./xicon.png")'
       : "background-image: unset"}
 `;

@@ -9,6 +9,6 @@ export default defineConfig({
       'shared': path.resolve(__dirname, './src/shared'),
     },
   },
+  base: '/todoapp/',
   plugins: [react()],
-  base: '/todoapp/'
 })
