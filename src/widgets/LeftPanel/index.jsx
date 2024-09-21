@@ -9,7 +9,8 @@ import {
   TagsHeader,
   TagsBody,
   ButtonWrapper,
-  ResetButton, InfoText,
+  ResetButton,
+  InfoText,
 } from "./styles.jsx";
 
 import { UserAvatar, Divider, Tag, Button } from "shared/components";
@@ -26,10 +27,7 @@ export const LeftPanel = ({
   return (
     <Background>
       <UserPanel>
-        <UserAvatar
-          type="onUser"
-          userImage={userAvatar || "./public/chicken.jpg"}
-        />
+        <UserAvatar type="onUser" userImage={userAvatar || "./chicken.jpg"} />
         <span>{userName || ""}</span>
       </UserPanel>
       <Divider />
