@@ -14,8 +14,6 @@ export const TaskList = ({
   tagToFilter,
 }) => {
   const [filteredTasks, setFilteredTasks] = useState(tasks);
-  // const [tasksSortedByTag, setTasksSortedByTag] = useState(tasks);
-  // const [savedTasks, setSavedTasks] = useState(tasks);
 
   function toggleCheck(e, taskId) {
     e.stopPropagation();

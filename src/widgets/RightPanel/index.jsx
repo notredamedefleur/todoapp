@@ -48,13 +48,16 @@ export const RightPanel = ({
       tasks = tasks.filter((task) => task.id !== taskId);
       setTasks(tasks);
       setTaskToEdit(null);
+      setCurrentTags(null);
+      setEditMode(false);
       toggleRightPanelVisibility();
     }
   }
 
+
+
   function saveTask() {
     if (editMode === false) {
-      // make a new task
       let task = {
         id: taskId,
         name: taskName,
@@ -78,12 +81,23 @@ export const RightPanel = ({
 
   const [content, setContent] = useState("+ Add New Tag");
 
+  let tagsMappedToName = useCallback(tags.map((tag) => tag.tagName), [tags]);
+
+
   function addNewTag(e) {
+    if (e.target.value === '') {
+      e.target.value = '+ Add New Tag';
+    }
     if (content !== "+ Add New Tag") {
       let tag = {};
       tag.tagName = content;
       tag.tagColor = pickRandomColor();
       tag.id = content;
+      if (tagsMappedToName.includes(tag.tagName)) {
+        setContent('+ Add New Tag');
+        e.target.value = '+ Add New Tag'
+        return;
+      }
       let newTags = [...tags];
       newTags.push(tag);
       setTags(newTags);
@@ -125,6 +139,7 @@ export const RightPanel = ({
           className={className}
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
+          onClick={(e) => {(e.target.value === 'New Task') ? e.target.value = '' : null}}
         ></Header>
         <Text>Task description:</Text>
         <InputField
@@ -139,7 +154,7 @@ export const RightPanel = ({
           ></DatePickerStyled>
         </DatePickerWrapper>
         <TagsPanel>
-          <Text>Tags:</Text>
+          <Text style={{marginLeft: '0px'}}>Tags:</Text>
           {!editMode ? (
             <AddNewTag
               tagName="+ Add New Tag"
@@ -153,8 +168,12 @@ export const RightPanel = ({
         </TagsPanel>
       </Wrapper>
       <ButtonWrapper>
-        <ButtonStyled variant='bordered' onClick={deleteTask}>Delete Task</ButtonStyled>
-        <ButtonStyled variant='bordered' onClick={saveTask}>Save Changes</ButtonStyled>
+        <ButtonStyled variant="bordered" onClick={deleteTask} style={{backgroundColor: "#FBFFF5"}}>
+          Delete Task
+        </ButtonStyled>
+        <ButtonStyled variant="bordered" onClick={saveTask} style={{backgroundColor: "#DDFFB2"}}>
+          Save Changes
+        </ButtonStyled>
       </ButtonWrapper>
     </Background>
   );

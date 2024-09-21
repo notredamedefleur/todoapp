@@ -26,14 +26,21 @@ export const ToDoPage = () => {
     localStorage.getItem("userAvatar") || "",
   );
   const [showModal, setShowModal] = useState(!localStorage.getItem("userName"));
+  const [inputNameValue, setInputNameValue] = useState("");
+  const [avatarValue, setAvatarValue] = useState("");
+  const [selectedAvatar, setSelectedAvatar] = useState("");
 
-  function clearLs() {
+  function clearLS() {
     localStorage.clear();
     setTasks([]);
     setTags([]);
     setUserName("");
     setUserAvatar("./public/chicken.jpg");
     setShowModal(true);
+    setRightPanelVisibility(false);
+    setInputNameValue("");
+    setAvatarValue("");
+    setSelectedAvatar("");
   }
 
   useEffect(() => {
@@ -57,6 +64,7 @@ export const ToDoPage = () => {
     setTaskName("New Task");
     setTaskDescription("");
     setTaskDate(new Date());
+    setCurrentTags([]);
     setEditMode(false);
     setRightPanelVisibility(true);
   }
@@ -66,11 +74,20 @@ export const ToDoPage = () => {
   }
 
   function handleTagClick(tag) {
-    setTagToFilter(tag);
+    if (rightPanelVisibility) {
+      if (!currentTags.includes(tag)) {
+        setCurrentTags([...currentTags, tag]);
+      }
+    }
+    if (!rightPanelVisibility) {
+      setTagToFilter(tag);
+    }
   }
 
   function showAllTags() {
-    setTagToFilter(null);
+    if (!rightPanelVisibility) {
+      setTagToFilter(null);
+    }
   }
 
   return (
@@ -82,7 +99,7 @@ export const ToDoPage = () => {
             tags={tags}
             handleTagClick={handleTagClick}
             showAllTags={showAllTags}
-            clearLS={clearLs}
+            clearLS={clearLS}
             userName={userName}
             userAvatar={userAvatar}
           />
@@ -133,6 +150,12 @@ export const ToDoPage = () => {
         setUserAvatar={setUserAvatar}
         setShowModal={setShowModal}
         showModal={showModal}
+        inputNameValue={inputNameValue}
+        setInputNameValue={setInputNameValue}
+        avatarValue={avatarValue}
+        setAvatarValue={setAvatarValue}
+        selectedAvatar={selectedAvatar}
+        setSelectedAvatar={setSelectedAvatar}
       />
     </>
   );

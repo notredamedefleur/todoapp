@@ -28,11 +28,14 @@ export const TagsBody = styled.div`
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 export const TagsHeader = styled.div`
   ${FONTS.header2}
   margin-left: 15px;
+  margin-bottom: 15px;
 `;
 
 export const TasksHeader = styled.div`
@@ -60,4 +63,15 @@ export const ResetButton = styled(Button)`
   transform: translateX(-50%);
   position: absolute;
   bottom: 20px;
+`;
+
+export const InfoText = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 580px;
+  opacity: 0.5;
+  margin-left: 15px;
+  z-index: -1;
+  width: 300px;
+  text-align: center;
 `;

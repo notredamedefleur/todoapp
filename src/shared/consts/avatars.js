@@ -1,0 +1,1 @@
+export const avatars = ["./lion.jpg", "./monkey.jpg", "./swine.jpg", "./cat.jpg", "./chicken.jpg"]

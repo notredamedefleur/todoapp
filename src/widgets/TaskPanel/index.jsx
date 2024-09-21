@@ -44,7 +44,7 @@ export const TaskPanel = ({
           tagToFilter={tagToFilter}
         />
       )),
-    [tasks],
+    [tasks, tagToFilter, setEditMode, setTaskId],
   );
 
   return (

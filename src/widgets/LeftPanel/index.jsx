@@ -9,7 +9,7 @@ import {
   TagsHeader,
   TagsBody,
   ButtonWrapper,
-  ResetButton,
+  ResetButton, InfoText,
 } from "./styles.jsx";
 
 import { UserAvatar, Divider, Tag, Button } from "shared/components";
@@ -57,6 +57,7 @@ export const LeftPanel = ({
             </TagsBody>
           </TagsTab>
         </div>
+        <InfoText>Click on TASKS or TAGS to reset sorting</InfoText>
         <div style={{ display: "flex", justifyContent: "center" }}></div>
       </ButtonWrapper>
       <ResetButton variant="bordered" onClick={clearLS}>

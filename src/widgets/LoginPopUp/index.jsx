@@ -6,62 +6,66 @@ import {
   Background,
   NameEnter,
   Welcome,
+  Wrapper,
 } from "./styles.js";
 import { UserAvatar } from "shared/components";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo} from "react";
+import { avatars } from "shared/consts/avatars.js";
 
 export const LoginPopUp = ({
   setUserName,
   setUserAvatar,
   setShowModal,
   showModal,
+    inputNameValue, setInputNameValue,
+    avatarValue, setAvatarValue,
+    selectedAvatar, setSelectedAvatar,
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [avatarValue, setAvatarValue] = useState("");
+
+
+  const selectAndHighlight = useCallback((url) => {
+    setAvatarValue(url);
+    setSelectedAvatar(url);
+  }, []);
 
   const handleChange = useCallback((e) => {
-    setInputValue(e.target.value);
+    setInputNameValue(e.target.value);
   }, []);
 
   const handleClose = useCallback(() => {
     setUserAvatar(avatarValue);
-    setUserName(inputValue);
+    setUserName(inputNameValue);
     setShowModal(false);
-  }, [avatarValue, inputValue]);
+  }, [avatarValue, inputNameValue]);
+
+  const avatarList = useMemo(
+    () =>
+      avatars.map((avatar) => (
+        <UserAvatar
+          selectedAvatar={selectedAvatar}
+          key={avatar}
+          userImage={avatar}
+          onClick={() => selectAndHighlight(avatar)}
+          isSelected={selectedAvatar === avatar}
+        />
+      )),
+    [selectedAvatar],
+  );
+
+
 
   return (
     <>
       <Modal showModal={showModal}>
         <Background>
           <Welcome>WELCOME</Welcome>
-          <div>
+          <Wrapper>
             <NameEnter>Enter your name</NameEnter>
-            <NameInput value={inputValue} onChange={(e) => handleChange(e)} />
-          </div>
+            <NameInput value={inputNameValue} onChange={(e) => handleChange(e)} />
+          </Wrapper>
           <div>
             <NameEnter>Choose an avatar</NameEnter>
-            <AvatarGallery>
-              <UserAvatar
-                userImage={"./public/chicken.jpg"}
-                onClick={() => setAvatarValue("./public/chicken.jpg")}
-              />
-              <UserAvatar
-                userImage={"./public/cat.jpg"}
-                onClick={() => setAvatarValue("./public/cat.jpg")}
-              />
-              <UserAvatar
-                userImage={"./public/lion.jpg"}
-                onClick={() => setAvatarValue("./public/lion.jpg")}
-              />
-              <UserAvatar
-                userImage={"./public/monkey.jpg"}
-                onClick={() => setAvatarValue("./public/monkey.jpg")}
-              />
-              <UserAvatar
-                userImage={"./public/swine.jpg"}
-                onClick={() => setAvatarValue("./public/swine.jpg")}
-              />
-            </AvatarGallery>
+            <AvatarGallery>{avatarList}</AvatarGallery>
           </div>
           <Button
             variant="bordered"

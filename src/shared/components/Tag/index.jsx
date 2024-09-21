@@ -25,8 +25,9 @@ export const AddNewTag = ({ content, setContent, tagColor, addNewTag }) => {
         defaultValue={content}
         style={{ width }}
         onChange={changeHandler}
-        onBlur={addNewTag}
+        onBlur={(e) => addNewTag(e)}
         onKeyUp={(e) => (e.key === "Enter" ? addNewTag(e) : null)}
+        onClick={(e) => {(content === '+ Add New Tag') ? e.target.value = '' : null}}
       />
     </>
   );

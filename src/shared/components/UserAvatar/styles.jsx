@@ -12,4 +12,5 @@ export const UserImgPick = styled.img`
   height: 80px;
   border-radius: 50%;
   margin: 10px;
+  ${(props) => (props.isSelected ? "border: 2px solid black" : null)};
 `;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import * as FONTS from "../../shared/consts/index.js";
+import { FONTS } from "shared/consts";
 
 export const Background = styled.div`
   background-color: #f1ffdf;
@@ -16,8 +16,8 @@ export const NameInput = styled.input`
   border: none;
   height: 40px;
   width: 500px;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  padding-left: 10px;
+  margin: 10px 0 30px 0;
   font-family: "Poppins", sans-serif;
   ${FONTS.body1}
 `;
@@ -35,4 +35,8 @@ export const Welcome = styled.div`
 export const NameEnter = styled.div`
   font-family: "Poppins", sans-serif;
   ${FONTS.body1}
+`;
+
+export const Wrapper = styled.div`
+  margin-left: 10px;
 `;

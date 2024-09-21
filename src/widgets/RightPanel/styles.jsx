@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const Header = styled.input`
+  font-family: Poppins, sans-serif;
   ${FONTS.header3};
   margin: 30px;
   text-align: center;
@@ -79,6 +80,8 @@ export const TagsPanel = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 export const Wrapper = styled.div`
