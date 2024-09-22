@@ -56,7 +56,7 @@ export const LeftPanel = ({
           </TagsTab>
         </div>
       </ButtonWrapper>
-        <InfoText>Click on TASKS or TAGS to reset sorting</InfoText>
+      <InfoText>Click on TASKS or TAGS to reset sorting</InfoText>
       <ResetButton variant="bordered" onClick={clearLS}>
         Reset
       </ResetButton>
