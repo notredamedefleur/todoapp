@@ -67,8 +67,7 @@ export const ResetButton = styled(Button)`
 
 export const InfoText = styled.div`
   position: absolute;
-  left: 10px;
-  top: 580px;
+  bottom: 90px;
   opacity: 0.5;
   margin-left: 15px;
   z-index: -1;
