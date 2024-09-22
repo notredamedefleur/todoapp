@@ -34,7 +34,7 @@ export const TaskList = ({
     }
     toggleRightPanelVisibility();
     setTaskId(taskId);
-    editMode ? setEditMode(false) : setEditMode(true);
+    setEditMode(true);
     setTaskToEdit(tasks.find((task) => task.id === taskId));
   }
 

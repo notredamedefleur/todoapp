@@ -54,8 +54,6 @@ export const RightPanel = ({
     }
   }
 
-
-
   function saveTask() {
     if (editMode === false) {
       let task = {
@@ -74,6 +72,9 @@ export const RightPanel = ({
       taskToEdit.name = taskName;
       taskToEdit.description = taskDescription;
       taskToEdit.date = taskDate;
+      setTasks(
+        tasks.map((task) => (task.id === taskToEdit.id ? taskToEdit : task)),
+      );
       toggleRightPanelVisibility();
       setEditMode(false);
     }
@@ -81,12 +82,19 @@ export const RightPanel = ({
 
   const [content, setContent] = useState("+ Add New Tag");
 
-  let tagsMappedToName = useCallback(tags.map((tag) => tag.tagName), [tags]);
+  let tagsMappedToName = useCallback(
+    tags.map((tag) => tag.tagName),
+    [tags],
+  );
 
+  let currentTagsMappedToName = useCallback(
+    currentTags.map((tag) => tag.tagName),
+    [currentTags],
+  );
 
   function addNewTag(e) {
-    if (e.target.value === '') {
-      e.target.value = '+ Add New Tag';
+    if (e.target.value === "") {
+      e.target.value = "+ Add New Tag";
     }
     if (content !== "+ Add New Tag") {
       let tag = {};
@@ -94,8 +102,14 @@ export const RightPanel = ({
       tag.tagColor = pickRandomColor();
       tag.id = content;
       if (tagsMappedToName.includes(tag.tagName)) {
-        setContent('+ Add New Tag');
-        e.target.value = '+ Add New Tag'
+        if (currentTagsMappedToName.includes(tag.tagName)) {
+          setContent("+ Add New Tag");
+          e.target.value = "+ Add New Tag";
+          return;
+        }
+        setCurrentTags([...currentTags, tag]);
+        setContent("+ Add New Tag");
+        e.target.value = "+ Add New Tag";
         return;
       }
       let newTags = [...tags];
@@ -139,7 +153,9 @@ export const RightPanel = ({
           className={className}
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
-          onClick={(e) => {(e.target.value === 'New Task') ? e.target.value = '' : null}}
+          onClick={(e) => {
+            e.target.value === "New Task" ? (e.target.value = "") : null;
+          }}
         ></Header>
         <Text>Task description:</Text>
         <InputField
@@ -154,7 +170,7 @@ export const RightPanel = ({
           ></DatePickerStyled>
         </DatePickerWrapper>
         <TagsPanel>
-          <Text style={{marginLeft: '0px'}}>Tags:</Text>
+          <Text style={{ marginLeft: "0px" }}>Tags:</Text>
           {!editMode ? (
             <AddNewTag
               tagName="+ Add New Tag"
@@ -168,10 +184,18 @@ export const RightPanel = ({
         </TagsPanel>
       </Wrapper>
       <ButtonWrapper>
-        <ButtonStyled variant="bordered" onClick={deleteTask} style={{backgroundColor: "#FBFFF5"}}>
+        <ButtonStyled
+          variant="bordered"
+          onClick={deleteTask}
+          style={{ backgroundColor: "#FBFFF5" }}
+        >
           Delete Task
         </ButtonStyled>
-        <ButtonStyled variant="bordered" onClick={saveTask} style={{backgroundColor: "#DDFFB2"}}>
+        <ButtonStyled
+          variant="bordered"
+          onClick={saveTask}
+          style={{ backgroundColor: "#DDFFB2" }}
+        >
           Save Changes
         </ButtonStyled>
       </ButtonWrapper>
